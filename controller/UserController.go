@@ -95,7 +95,23 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 修改用户handle函数
 */
 func TestRedis(w http.ResponseWriter, r *http.Request) {
-	cache.SetOne("go-client-key", "hello redis client")
-	val := cache.GetOne("go-client-key")
-	fmt.Println("get ", val)
+	//cache.SetOne("go-client-key", "hello redis client")
+	//val := cache.GetOne("go-client-key")
+
+	cache.LPush("go_list_key", "one")
+	cache.LPush("go_list_key", "two")
+	listResult := cache.LIndex("go_list_key", 0)
+	fmt.Println("list ", listResult)
+
+	cache.Subscribe("mychannel")
+	cache.Publish("mychannel", "hello")
+
+	cache.HSet("gomap", "one", "100")
+	cache.HSet("gomap", "two", "200")
+	val := cache.HGet("gomap", "two")
+	fmt.Println("map value = ", val)
+	cache.HDel("gomap", "two")
+	val = cache.HGet("gomap", "two")
+	fmt.Println("deleted map value = ", val)
+
 }
