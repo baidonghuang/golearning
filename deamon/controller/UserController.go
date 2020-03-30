@@ -4,10 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/satori/go.uuid"
-	"golearning/cache"
-	"golearning/dao"
-	"golearning/entity"
-	"golearning/service"
+	"golearning/deamon/cache"
+	"golearning/deamon/dao"
+	entity2 "golearning/deamon/entity"
+	"golearning/deamon/service"
 	"net/http"
 	"strconv"
 )
@@ -57,7 +57,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(r.PostFormValue("name"))
 	}
 
-	var user entity.UserEntity
+	var user entity2.UserEntity
 
 	// 设置年龄
 	age, err := strconv.Atoi(r.PostFormValue("age"))
@@ -66,7 +66,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(500)
 	} else {
 		uid := uuid.Must(uuid.NewV4())
-		user = entity.UserEntity{Id: uid.String(), Age: age}
+		user = entity2.UserEntity{Id: uid.String(), Age: age}
 	}
 
 	// 设置姓名
@@ -87,7 +87,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 */
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("---->  controller's method 'UpdateUser' is called")
-	user := entity.UserEntity{Age: 1}
+	user := entity2.UserEntity{Age: 1}
 	service.SaveUser(user)
 }
 

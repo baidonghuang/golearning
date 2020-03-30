@@ -1,7 +1,7 @@
 package test
 
 import (
-	"golearning/controller"
+	"golearning/deamon/controller"
 	"net/http"
 	"testing"
 )

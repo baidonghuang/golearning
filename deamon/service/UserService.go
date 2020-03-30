@@ -3,9 +3,9 @@ package service
 import (
 	"errors"
 	"fmt"
-	"golearning/dao"
-	"golearning/entity"
-	"golearning/exception"
+	dao2 "golearning/deamon/dao"
+	entity2 "golearning/deamon/entity"
+	"golearning/deamon/exception"
 	"strconv"
 )
 
@@ -15,19 +15,19 @@ var userCount = 1
 // 全局变量/静态变量
 var ServiceName = "Old User Service"
 
-func UserList() []entity.UserEntity {
-	return dao.List()
+func UserList() []entity2.UserEntity {
+	return dao2.List()
 }
 
 // 公开函数，新建用户
-func SaveUser(user entity.UserEntity) (result string, err string) {
+func SaveUser(user entity2.UserEntity) (result string, err string) {
 	// 1、表单校验
 	err = checkUser(user)
 	if err != "" {
 		fmt.Println(err)
 		return
 	}
-	dao.Save(user)
+	dao2.Save(user)
 	result = "user id is :" + user.Id + "My name is :" + user.GetName() + ", My age is " + strconv.Itoa(user.Age) + ", My number is " + strconv.Itoa(userCount)
 	fmt.Println(result)
 	userCount++
@@ -35,7 +35,7 @@ func SaveUser(user entity.UserEntity) (result string, err string) {
 }
 
 //私有函数
-func checkUser(user entity.UserEntity) (msg string) {
+func checkUser(user entity2.UserEntity) (msg string) {
 
 	if user.Age < 18 {
 		// 返回系统异常

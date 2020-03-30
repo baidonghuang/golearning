@@ -13,7 +13,7 @@
 /target/
 /logs
 /debug
-/controller/controller
-/controller/go.sum
-/controller/target
-/controller/.idea
+/deamon/controller/controller
+/deamon/controller/go.sum
+/deamon/controller/target
+/deamon/controller/.idea

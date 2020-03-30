@@ -1,7 +1,7 @@
 package main
 
 import (
-	"golearning/controller"
+	"golearning/deamon/controller"
 	"net/http"
 )
 
@@ -14,5 +14,5 @@ func main() {
 	http.HandleFunc("/user/redis", controller.TestRedis)
 
 	// 启动WEB服务器侦听
-	http.ListenAndServe("127.0.0.1:8088", nil)
+	http.ListenAndServe(":8088", nil)
 }
